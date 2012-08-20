@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Lista Pessoas</title>
+</head>
+<body>
+{% if latest_poll_list %}
+    <ul>
+        {% for poll in latest_poll_list %}
+            <li><a href="/loja/{{ poll.nome }}/">{{ poll.nome }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
