@@ -4,10 +4,11 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.contrib.humanize.templatetags.humanize import intcomma
+import unicodedata
 
 def currency(dollars):
     dollars = round(float(dollars), 2)
-    return "R$%s%s" % (intcomma(int(dollars)), ("%0.2f" % dollars)[-3:])
+    return ("R$%s%s" % (intcomma(int(dollars)), ("%0.2f" % dollars)[-3:])).replace("R$-","-R$")
 
 FONTE = (('0','Caixa'),('1','Unibanco'),('2','Banco do Brasil'))
 TIPO_MOVIMENTO = (('0','Estoque Inicial'),('1','Quebra/Perda'))
@@ -15,7 +16,7 @@ TIPO_PESSOA = (('0', 'Cliente'),('1','Fornecedor'),('2','Outros'))
 STATUS_PEDIDO = (('0', u"Orçamento"),('1', u"Em Produção"),('2', u"Eliminado"),('3',u"Concluído"))
 STATUS_ITEM_PEDIDO =(('0',u"Orçamento"),('1',u"Em Produção"),('2',u"Eliminado"),('3',u"Concluído"))
 STATUS_DUPLICATA = (('0', u"Orçamento"),('1', u"Confirmada"),('3',u"Entregue"))
-TIPO_PAGAMENTO =(('0',u"Dinheiro"),('1',u"Cheque"),('2',u"Depósito"),('3',u"Outro"))
+TIPO_PAGAMENTO =(('0',u"Dinheiro"),('1',u"Cheque"),('2',u"Depósito"),('3',u"Transferência"))
 PAGAMENTO =(('0',u"Total"),('1',u"Entrada"),('2',u"Parcela"))
 
 class Pessoa(models.Model):
@@ -47,6 +48,7 @@ class Pessoa(models.Model):
         return self.nome_completo
     def __str__(self):
         return self.nome_completo
+
 class Telefone_Tipo(models.Model):
     tipo = models.CharField(max_length=3)
     data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
@@ -59,6 +61,7 @@ class Telefone_Tipo(models.Model):
         return self.tipo
     def __str__(self):
         return self.tipo
+
 class Telefone(models.Model):
     tipo = models.ForeignKey(Telefone_Tipo)
     telefone = models.CharField(max_length=20)
@@ -74,6 +77,7 @@ class Telefone(models.Model):
         return '%s - %s:%s' % (self.pessoa.nome_completo, self.tipo.tipo, self.telefone)
     def __str__(self):
         return '%s - %s:%s' % (self.pessoa.nome_completo, self.tipo.tipo, self.telefone)
+
 class Endereco(models.Model):
     rua = models.CharField(max_length=100,help_text=u"Rua e número")
     cidade = models.CharField(max_length=100,default='Belo Horizonte')
@@ -91,6 +95,7 @@ class Endereco(models.Model):
         return '%s - %s - %s/%s - %s' % (self.pessoa, self.rua, self.cidade, self.estado, self.cep)
     def __str__(self):
         return '%s - %s - %s/%s - %s' % (self.pessoa, self.rua, self.cidade, self.estado, self.cep)
+
 class Familia(models.Model):
     familia = models.CharField(max_length=30, verbose_name='Família')
     data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
@@ -103,6 +108,7 @@ class Familia(models.Model):
         return self.familia
     def __str__(self):
         return self.familia
+
 class Produto(models.Model):
     codigo = models.AutoField(primary_key=True)
     codigo_fornecedor = models.CharField(max_length=20, verbose_name='Código Fornecedor', blank=True)
@@ -155,6 +161,7 @@ class Produto(models.Model):
         return self.descricao
     def __str__(self):
         return self.descricao
+
 class Modelo(models.Model):
     modelo = models.CharField(max_length=30)
     multiplicador = models.DecimalField(decimal_places=4,max_digits=7,help_text='Utilizado para indicar Preço de Venda')
@@ -168,6 +175,7 @@ class Modelo(models.Model):
         return self.modelo
     def __str__(self):
         return self.modelo
+
 class Pedido(models.Model):
     codigo = models.AutoField(primary_key=True)
     pessoa = models.ForeignKey(Pessoa)
@@ -179,6 +187,9 @@ class Pedido(models.Model):
     items = models.ManyToManyField(Produto, through='Item_Pedido')
     data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
     data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
+    #todo acao no dropdown do admin para mandar email com confirmacao do pedido ao cliente
+    #todo email para cliente na modificacao de status
+
     class Meta:
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
@@ -196,6 +207,7 @@ class Pedido(models.Model):
     string_total.short_description = 'Total'
     string_total.boolean = False
     string_total.admin_order_field = '-codigo'
+    string_total = property(string_total)
     def total_pago(self):
         t = 0
         for p in self.pagamento_pedido_set.all():
@@ -208,6 +220,7 @@ class Pedido(models.Model):
     string_total_pago.short_description = 'Total Pago'
     string_total_pago.boolean = False
     string_total_pago.admin_order_field = '-codigo'
+    string_total_pago = property(string_total_pago)
     def lista_items(self):
         t = ''
         for i in self.item_pedido_set.all():
@@ -220,10 +233,11 @@ class Pedido(models.Model):
     lista_items.short_description = 'Lista Items'
     lista_items.boolean = False
     lista_items.admin_order_field = '-codigo'
+    lista_items = property(lista_items)
     def __unicode__(self):
-        return 'Pe%s-%s-%s-%s' % (self.codigo, STATUS_PEDIDO[int(self.status)][1], self.pessoa.nome_completo, self.string_total())
+        return 'Pe%s-%s-%s-%s' % (self.codigo, STATUS_PEDIDO[int(self.status)][1], self.pessoa.nome_completo, self.string_total)
     def __str__(self):
-        return 'Pe%s-%s-%s-%s' % (self.codigo, STATUS_PEDIDO[int(self.status)][1], self.pessoa.nome_completo, self.string_total())
+        return 'Pe%s-%s-%s-%s' % (self.codigo, STATUS_PEDIDO[int(self.status)][1], self.pessoa.nome_completo, self.string_total)
     def clean(self):
         if self.status == '0':
             if self.aprovado:
@@ -234,6 +248,7 @@ class Pedido(models.Model):
         if self.status == '3':
             if not self.aprovado:
                 raise ValidationError('Pedido ainda não aprovado, mudar o status para Orçamento ou aprove o pedido')
+
 class Item_Pedido(models.Model):
     produto = models.ForeignKey(Produto)
     pedido = models.ForeignKey(Pedido)
@@ -248,7 +263,8 @@ class Item_Pedido(models.Model):
         return currency(self.preco)
     string_preco.short_description = 'Preço Venda'
     string_preco.boolean = False
-    string_preco.admin_order_field = 'produto__descricao'
+    string_preco.admin_order_field = 'preco'
+    string_preco = property(string_preco)
     def clean(self):
         if self.pedido.status == '0':
             if self.status <> '0':
@@ -275,9 +291,10 @@ class Item_Pedido(models.Model):
         verbose_name_plural = 'Items Pedido'
         ordering = ['produto__familia','produto__descricao']
     def __unicode__(self):
-        return "%s - %s" % (self.produto.descricao, self.string_preco())
+        return "%s - %s" % (self.produto.descricao, self.string_preco)
     def __str__(self):
-        return "%s - %s" % (self.produto.descricao, self.string_preco())
+        return "%s - %s" % (self.produto.descricao, self.string_preco)
+
 class Duplicata(models.Model):
     codigo = models.AutoField(primary_key=True)
     numero = models.CharField(max_length=20, blank=True, verbose_name=u"Número")
@@ -329,14 +346,15 @@ class Duplicata(models.Model):
     lista_items.short_description = 'Lista Items'
     lista_items.boolean = False
     lista_items.admin_order_field = '-codigo'
+    lista_items = property(lista_items)
     def __unicode__(self):
         return 'Du%s-%s-%s-%s-%s' % (self.codigo, self.data_entrega, STATUS_DUPLICATA[int(self.status)][1], self.pessoa.nome_completo, self.string_total())
     def __str__(self):
         return 'Du%s-%s-%s-%s-%s' % (self.codigo, self.data_entrega, STATUS_DUPLICATA[int(self.status)][1], self.pessoa.nome_completo, self.string_total())
+
 class Item_Duplicata(models.Model):
     produto = models.ForeignKey(Produto)
     duplicata = models.ForeignKey(Duplicata)
-    #modelo = models.ForeignKey(Modelo)
     qtd = models.DecimalField(decimal_places=2,max_digits=7,verbose_name=u"Quantidade",default=1)
     preco = models.DecimalField(decimal_places=2,max_digits=7,verbose_name=u"Preço Compra",default=0,blank=True)
     #todo-me ultimo preço como default
@@ -346,103 +364,168 @@ class Item_Duplicata(models.Model):
         return currency(self.preco)
     string_preco.short_description = 'Preço Venda'
     string_preco.boolean = False
-    string_preco.admin_order_field = 'produto__descricao'
+    string_preco.admin_order_field = 'preco'
+    string_preco = property(string_preco)
     class Meta:
         verbose_name = 'Item Duplicata'
         verbose_name_plural = 'Items Duplicata'
         ordering = ['produto__familia','produto__descricao']
     def __unicode__(self):
-        return "Du%s-%s-%s-%s" % (self.duplicata.codigo, self.produto.descricao, self.qtd, self.string_preco())
+        return "Du%s-%s-%s-%s" % (self.duplicata.codigo, self.produto.descricao, self.qtd, self.string_preco)
     def __str__(self):
-        return "Du%s-%s-%s-%s" % (self.duplicata.codigo, self.produto.descricao, self.qtd, self.string_preco())
-class Pagamento(models.Model):
+        return "Du%s-%s-%s-%s" % (self.duplicata.codigo, self.produto.descricao, self.qtd, self.string_preco)
+
+class Contas(models.Model):
     codigo = models.AutoField(primary_key=True)
-    data = models.DateField(verbose_name='Data', default=timezone.now())
-    fonte = models.CharField(choices=FONTE,max_length=1, default='0',verbose_name='Fonte')
-    tipo_pagamento = models.CharField(choices=TIPO_PAGAMENTO,max_length=1, default='0',verbose_name='Tipo Pagamento')
-    pagamento = models.CharField(choices=PAGAMENTO,max_length=1, default='0')
-    pagamentos_pedido = models.ManyToManyField(Pedido, through='Pagamento_Pedido')
-    pagamentos_duplicata = models.ManyToManyField(Duplicata, through='Pagamento_Duplicata')
+    nome = models.CharField(max_length=20)
+    class Meta:
+        verbose_name = 'Conta'
+        verbose_name_plural = 'Contas'
+        ordering = ['codigo']
+    def saldo_atual(self):
+        from django.db.models import Sum
+        import decimal
+        t = decimal.Decimal(0)
+        if Pagamento_Duplicata.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']:
+            t = t - Pagamento_Duplicata.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        if Pagamento_Pedido.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t + Pagamento_Pedido.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        if Despesa.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']:
+            t = t - Despesa.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        if Transferencia.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']:
+            t = t - Transferencia.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        if Transferencia.objects.filter(destino=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']:
+            t = t + Transferencia.objects.filter(destino=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        if Ajuste_Conta.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']:
+            t = t + Ajuste_Conta.objects.filter(fonte=self).filter(data_transacao__lte=timezone.now()).\
+            all().aggregate(total=Sum('valor'))['total']
+        return t
+    saldo_atual = property(saldo_atual)
+    def string_saldo_atual(self):
+        return currency(self.saldo_atual)
+    string_saldo_atual.short_description = 'Saldo Atual'
+    string_saldo_atual.boolean = False
+    string_saldo_atual.admin_order_field = 'codigo'
+    #string_saldo_atual =property(string_saldo_atual)
+    def __unicode__(self):
+        return self.nome
+    def __str__(self):
+        return self.nome
+
+class Transacao(models.Model):
+    codigo = models.AutoField(primary_key=True)
+    data_transacao = models.DateField(verbose_name='Data', default=timezone.now())
+    fonte = models.ForeignKey(Contas, related_name="fonte_rel")
     texto_extrato = models.CharField(max_length=30, verbose_name='Texto Extrato', blank=True)
     verificado = models.BooleanField(default=False)
     data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
     data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
     class Meta:
-        verbose_name = 'Pagamento'
-        verbose_name_plural = 'Pagamentos'
-        ordering = ['-data', 'fonte', 'tipo_pagamento', 'pagamento']
-    def total(self):
-        t = 0
-        for p in self.pagamento_pedido_set.all():
-            t = t + p.valor
-        for p in self.pagamento_duplicata_set.all():
-            t = t - p.valor
-        for p in self.despesa_set.all():
-            t = t - p.valor
+        verbose_name = u"Transação"
+        verbose_name_plural = u"Transações"
+        ordering = ['-data_transacao', 'fonte',]
+    def valor(self):
+        from django.db.models import Sum
+        import decimal
+        t = decimal.Decimal(0)
+        if Pagamento_Duplicata.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t - Pagamento_Duplicata.objects.filter(codigo=self.codigo).\
+                    all().aggregate(total=Sum('valor'))['total']
+        if Pagamento_Pedido.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t + Pagamento_Pedido.objects.filter(codigo=self.codigo).\
+                    all().aggregate(total=Sum('valor'))['total']
+        if Despesa.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t - Despesa.objects.filter(codigo=self.codigo).\
+                    all().aggregate(total=Sum('valor'))['total']
+        if Transferencia.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t + Transferencia.objects.filter(codigo=self.codigo).\
+                    all().aggregate(total=Sum('valor'))['total']
+        if Ajuste_Conta.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            t = t + Ajuste_Conta.objects.filter(codigo=self.codigo).\
+                    all().aggregate(total=Sum('valor'))['total']
         return t
-    total = property(total)
-    def string_total(self):
-        return currency(self.total)
-    string_total.short_description = 'Total'
-    string_total.boolean = False
-    string_total.admin_order_field = '-data'
-    def items(self):
-        t = ''
-        for i in self.pagamento_duplicata_set.all():
-            if t == '':
-                t = '%sDu%s-%s-%s' % (t, i.duplicata.codigo, i.duplicata.pessoa.nome, i.string_valor)
-            else:
-                t = '%s, Du%s-%s-%s' % (t, i.duplicata.codigo, i.duplicata.pessoa.nome, i.string_valor)
-        for i in self.pagamento_pedido_set.all():
-            if t == '':
-                t = '%sPe%s-%s-%s' % (t, i.pedido.codigo, i.pedido.pessoa.nome, i.string_valor)
-            else:
-                t = '%s, Pe%s-%s-%s' % (t, i.pedido.codigo, i.pedido.pessoa.nome, i.string_valor)
-        for i in self.despesa_set.all():
-            if t == '':
-                t = '%sDe%s-%s-%s' % (t, i.codigo, i.pessoa.nome, i.string_valor)
-            else:
-                t = '%s, De%s-%s-%s' % (t, i.codigo, i.pessoa.nome, i.string_valor)
-        return t
-    items = property(items)
-    def __unicode__(self):
-        return 'Pa%s-%s-%s-%s' % (self.codigo, self.data, TIPO_PAGAMENTO[int(self.tipo_pagamento)][1], self.items)
-    def __str__(self):
-        return 'Pa%s-%s-%s-%s' % (self.codigo, self.data, TIPO_PAGAMENTO[int(self.tipo_pagamento)][1], self.items)
-class Pagamento_Pedido(models.Model):
-    pedido = models.ForeignKey(Pedido)
-    pagamento = models.ForeignKey(Pagamento)
-    valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
-    data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
-    data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
-    class Meta:
-        verbose_name = 'Pagamento Pedido'
-        verbose_name_plural = 'Pagamentos Pedido'
-        ordering = ['pedido']
     def string_valor(self):
-        return currency(self.valor)
-    string_valor =property(string_valor)
+        return currency(self.valor())
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = '-data_transacao'
+    #string_valor = property(string_valor)
+    def tipo(self):
+        from django.db.models import Sum
+        if Pagamento_Duplicata.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            return 'Pagamento Duplicata - %s' % (Pagamento_Duplicata.objects.get(codigo=self.codigo))
+        if Pagamento_Pedido.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            return 'Pagamento Pedido - %s' % (Pagamento_Pedido.objects.get(codigo=self.codigo))
+        if Despesa.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            return 'Despesa - %s' % (Despesa.objects.get(codigo=self.codigo))
+        if Transferencia.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            return u"Transferência de %s a %s" % (Transferencia.objects.get(codigo=self.codigo).fonte, Transferencia.objects.get(codigo=self.codigo).destino)
+        if Ajuste_Conta.objects.filter(codigo=self.codigo).\
+           all().aggregate(total=Sum('valor'))['total']:
+            return 'Ajuste de Conta - %s' % (Ajuste_Conta.objects.get(codigo=self.codigo))
+        return ''
     def __unicode__(self):
-        return 'Pe%s-%s-%s' % (self.pedido.codigo, self.pedido.pessoa.nome, self.string_valor)
+        return '%s-%s-%s' % (self.data_transacao, self.tipo, self.string_valor())
     def __str__(self):
-        return 'Pe%s-%s-%s' % (self.pedido.codigo, self.pedido.pessoa.nome, self.string_valor)
-class Pagamento_Duplicata(models.Model):
+        return '%s-%s-%s' % (self.data_transacao, self.tipo, self.string_valor())
+class Pagamento_Duplicata(Transacao):
     duplicata = models.ForeignKey(Duplicata)
-    pagamento = models.ForeignKey(Pagamento)
+    tipo_pagamento = models.CharField(choices=TIPO_PAGAMENTO,max_length=1, default='0',verbose_name='Tipo Pagamento')
+    pagamento = models.CharField(choices=PAGAMENTO,max_length=1, default='0')
     valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
-    data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
-    data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
     class Meta:
         verbose_name = 'Pagamento Duplicata'
         verbose_name_plural = 'Pagamentos Duplicata'
-        ordering = ['duplicata']
+        ordering = ['-data_transacao', 'fonte', 'duplicata']
     def string_valor(self):
         return currency(self.valor)
-    string_valor =property(string_valor)
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = 'valor'
     def __unicode__(self):
-        return 'Pe%s-%s-%s' % (self.duplicata.codigo, self.duplicata.pessoa.nome, self.string_valor)
+        return 'Pa-Du-%s-%s-%s-%s' % (self.data_transacao, self.duplicata.codigo, self.duplicata.pessoa.nome, self.string_valor())
     def __str__(self):
-        return 'Pe%s-%s-%s' % (self.duplicata.codigo, self.duplicata.pessoa.nome, self.string_valor)
+        return 'Pa-Du-%s-%s-%s-%s' % (self.data_transacao, self.duplicata.codigo, self.duplicata.pessoa.nome, self.string_valor())
+
+class Pagamento_Pedido(Transacao):
+    pedido = models.ForeignKey(Pedido)
+    tipo_pagamento = models.CharField(choices=TIPO_PAGAMENTO,max_length=1, default='0',verbose_name='Tipo Pagamento')
+    pagamento = models.CharField(choices=PAGAMENTO,max_length=1, default='0')
+    valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
+    class Meta:
+        verbose_name = 'Pagamento Pedido'
+        verbose_name_plural = 'Pagamentos Pedido'
+        ordering = ['-data_transacao', 'fonte', 'pedido']
+    def string_valor(self):
+        return currency(self.valor)
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = 'valor'
+    def __unicode__(self):
+        return 'Pa-Pe-%s-%s-%s-%s' % (self.data_transacao, self.pedido.codigo, self.pedido.pessoa.nome, self.string_valor())
+    def __str__(self):
+        return 'Pa-Pe-%s-%s-%s-%s' % (self.data_transacao, self.pedido.codigo, self.pedido.pessoa.nome, self.string_valor())
+
 class Tipo_Despesa(models.Model):
     descricao = models.CharField(max_length=30, verbose_name='Descrição')
     data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
@@ -455,35 +538,32 @@ class Tipo_Despesa(models.Model):
         return self.descricao
     def __str__(self):
         return self.descricao
-class Despesa(models.Model):
-    codigo = models.AutoField(primary_key=True)
-    pagamento = models.ForeignKey(Pagamento)
-    pessoa = models.ForeignKey(Pessoa, blank=True)
+
+class Despesa(Transacao):
+    cod = models.AutoField(primary_key=True)
+    pessoa = models.ForeignKey(Pessoa, null=True, blank=True)
     tipo_despesa = models.ForeignKey(Tipo_Despesa)
+    tipo_pagamento = models.CharField(choices=TIPO_PAGAMENTO,max_length=1, default='0',verbose_name='Tipo Pagamento')
     valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
     descricao = models.CharField(max_length=30,blank=True, verbose_name='Descrição')
-    data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
-    data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
     class Meta:
         verbose_name = 'Despesa'
         verbose_name_plural = 'Despesas'
-        ordering = ['-pagamento__data', 'tipo_despesa', '-valor']
-    def data(self):
-        return self.pagamento.data
-    data.short_description = 'Data'
-    data.boolean = False
-    data.admin_order_field = '-pagamento__data'
+        ordering = ['-data_transacao', 'fonte', 'tipo_despesa']
     def string_valor(self):
         return currency(self.valor)
-    string_valor =property(string_valor)
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = 'valor'
     def __unicode__(self):
-        return 'Pe%s-%s-%s' % (self.codigo, self.pessoa.nome, self.string_valor)
+        return 'De-%s-%s-%s' % (self.data_transacao, self.tipo_despesa, self.string_valor())
     def __str__(self):
-        return 'Pe%s-%s-%s' % (self.codigo, self.pessoa.nome, self.string_valor)
+        return 'De-%s-%s-%s' % (self.data_transacao, self.tipo_despesa, self.string_valor())
+
 class Movimento_Estoque(models.Model):
     codigo = models.AutoField(primary_key=True)
     tipo_movimento = models.CharField(max_length=1, choices=TIPO_MOVIMENTO, default='1',verbose_name='Tipo Movimento')
-    data = models.DateField(verbose_name=u"Data", default=timezone.now())
+    data_movimento = models.DateField(verbose_name=u"Data", default=timezone.now())
     produto = models.ForeignKey(Produto)
     qtd = models.DecimalField(decimal_places=2,max_digits=7,verbose_name=u"Quantidade",default=1)
     descricao = models.CharField(max_length=30, blank=True, verbose_name='Descrição')
@@ -492,47 +572,49 @@ class Movimento_Estoque(models.Model):
     class Meta:
         verbose_name = 'Movimento Estoque'
         verbose_name_plural = 'Movimentos Estoque'
-        ordering = ['-data', 'tipo_movimento', 'produto']
+        ordering = ['-data_movimento', 'tipo_movimento', 'produto']
     def __unicode__(self):
-        return 'Es%s-%s-%s-%s' % (self.codigo, self.data, TIPO_MOVIMENTO[int(self.tipo_movimento)][1], self.produto.descricao)
+        return 'Es-%s-%s-%s-%s' % (self.codigo, self.data_movimento, TIPO_MOVIMENTO[int(self.tipo_movimento)][1], self.produto.descricao)
     def __str__(self):
-        return 'Es%s-%s-%s-%s' % (self.codigo, self.data, TIPO_MOVIMENTO[int(self.tipo_movimento)][1], self.produto.descricao)
-class Transferencia(models.Model):
+        return 'Es-%s-%s-%s-%s' % (self.codigo, self.data_movimento, TIPO_MOVIMENTO[int(self.tipo_movimento)][1], self.produto.descricao)
+
+class Transferencia(Transacao):
     numero = models.CharField(max_length=20, blank=True, verbose_name=u"Número")
-    data = models.DateField(verbose_name=u"Data", default=timezone.now())
-    de = models.CharField(choices=FONTE,max_length=1, default='0',verbose_name='De')
-    a = models.CharField(choices=FONTE,max_length=1, default='0',verbose_name='A')
+    destino = models.ForeignKey(Contas, verbose_name='Destino', related_name="destino_rel")
     valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
     descricao = models.CharField(max_length=50, blank=True, verbose_name='Descrição')
-    texto_extrato = models.CharField(max_length=30, verbose_name='Texto Extrato', blank=True)
-    verificado = models.BooleanField(default=False)
-    data_criacao = models.DateTimeField(auto_now_add=True,editable=False,verbose_name=u"Data criação")
-    data_modificacao = models.DateTimeField(auto_now=True,editable=False,verbose_name=u"Data Modificação")
     class Meta:
         verbose_name = 'Transferência/Depósito'
         verbose_name_plural = 'Transferências/Depósitos'
-        ordering = ['-data', 'de', 'a', '-valor']
+        #ordering = ['destino', 'numero', '-valor']
     def string_valor(self):
         return currency(self.valor)
-    string_valor =property(string_valor)
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = 'valor'
+    #string_valor = property(string_valor)
     def clean(self):
-        if self.de == self.a:
-            raise ValidationError('Fonte De não pode ser igual a fonte A')
+        if self.fonte == self.destino:
+            raise ValidationError('Conta de origem e destino não podem ser iguais')
     def __unicode__(self):
-        return 'Tr%s-%s-%s-%s' % (self.data, FONTE[int(self.de)][1], FONTE[int(self.a)][1], self.descricao)
+        return 'Tr-%s-%s-%s-%s-%s' % (self.data_transacao, self.fonte.nome, self.destino.nome, self.descricao, self.string_valor())
     def __str__(self):
-        return 'Tr%s-%s-%s-%s' % (self.data, FONTE[int(self.de)][1], FONTE[int(self.a)][1], self.descricao)
+        return 'Tr-%s-%s-%s-%s-%s' % (self.data_transacao, self.fonte.nome, self.destino.nome, self.descricao, self.string_valor())
 
+class Ajuste_Conta(Transacao):
+    valor = models.DecimalField(decimal_places=2,max_digits=7,verbose_name='Valor')
+    descricao = models.CharField(max_length=50, blank=True, verbose_name='Descrição')
+    class Meta:
+        verbose_name = 'Ajuste de Conta'
+        verbose_name_plural = 'Ajustes de Conta'
+        ordering = ['-data_transacao', 'fonte', ]
+    def string_valor(self):
+        return currency(self.valor)
+    string_valor.short_description = 'Valor'
+    string_valor.boolean = False
+    #string_valor.admin_order_field = 'valor'
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def __unicode__(self):
+        return 'Aj-%s-%s-%s-%s' % (self.data_transacao, self.fonte, self.descricao, self.string_valor())
+    def __str__(self):
+        return 'Aj-%s-%s-%s-%s' % (self.data_transacao, self.fonte, self.descricao, self.string_valor())
