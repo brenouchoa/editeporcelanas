@@ -1,7 +1,8 @@
 # Django settings for editeporcelanas project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+MAC = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -9,7 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-if DEBUG:
+if MAC:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -118,17 +119,13 @@ ROOT_URLCONF = 'editeporcelanas.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'editeporcelanas.wsgi.application'
 
-if DEBUG:
+if MAC:
     TEMPLATE_DIRS = ('/Users/brenouchoa/PycharmProjects/editeporcelanas/templates'
     )
 else:
     TEMPLATE_DIRS = ('C:/Users/Edite/Documents/Github/editeporcelanas/templates'
     )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.messages.context_processors.messages',
-    'django.contrib.auth.context_processors.auth'
-    )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
