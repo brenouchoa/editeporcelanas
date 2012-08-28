@@ -1,26 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from loja.models import \
-    Pessoa, \
-    Telefone_Tipo, \
-    Telefone, \
-    Endereco, \
-    Familia, \
-    Produto, \
-    Modelo,\
-    Pedido, \
-    Item_Pedido, \
-    Duplicata, \
-    Item_Duplicata,\
-    Pagamento_Pedido, \
-    Pagamento_Duplicata, \
-    Tipo_Despesa, \
-    Despesa, \
-    Movimento_Estoque, \
-    Transferencia, \
-    Contas, \
-    Ajuste_Conta,\
-    Transacao
+from loja.models import *
 
 from django.contrib import admin
 from django.contrib.admin.filters import DateFieldListFilter, FieldListFilter
@@ -135,16 +115,37 @@ class AjusteContaInline0(admin.TabularInline):
     model = Ajuste_Conta
     extra = 0
 
+class Movimento_EstoqueInline(admin.TabularInline):
+    model = Ajuste_Estoque
+    extra = 1
+class Movimento_EstoqueInline0(admin.TabularInline):
+    model = Ajuste_Estoque
+    extra = 0
+
+class PedidoInline(admin.TabularInline):
+    model = Pedido
+    extra = 1
+class PedidoInline0(admin.TabularInline):
+    model = Pedido
+    extra = 0
+
+class DuplicataInline(admin.TabularInline):
+    model = Duplicata
+    extra = 1
+class DuplicataInline0(admin.TabularInline):
+    model = Duplicata
+    extra = 0
+
 class PessoaAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('nome_completo', 'sobrenome', 'email', 'telefones','ativa')
-    search_fields = ['nome']
+    list_display = ('_nome_completo', 'email', 'telefones','ativa')
+    search_fields = ['nome', 'sobrenome', 'email', 'telefones']
     list_filter = ['ativa']
     list_editable = ['ativa']
     fieldsets = [
         ('Principal', {'fields': ['nome', 'sobrenome', 'email']}),
     ]
-    inlines = [TelefonesInline, EnderecosInline]
+    inlines = [TelefonesInline, EnderecosInline, PedidoInline, DuplicataInline ]
 
 class DespesaAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -184,7 +185,8 @@ class ProdutoAdmin(admin.ModelAdmin):
         ('Principal', {'fields': ['familia', 'fornecedor', 'descricao',]}),
         ('Informações Fornecedor', {'fields': ['codigo_fornecedor', 'descricao_fornecedor',]}),
     ]
-    inlines = [ItemDuplicataInline0]
+    inlines = [ItemDuplicataInline0, ItemPedidoInline, Movimento_EstoqueInline]
+
 class PedidoAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('codigo', 'status', 'pessoa', 'data_entrega', 'data_pagamento', 'string_total', 'string_total_pago', 'lista_items')
@@ -208,7 +210,7 @@ class DuplicataAdmin(admin.ModelAdmin):
 class ContasAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ['codigo', 'nome', 'string_saldo_atual']
-    inlines = [DespesaInline0, PagamentoPedidoInline0, PagamentoDuplicataInline0, TransferenciaInline0, TransferenciaInlineDestino0, AjusteContaInline0]
+    inlines = [DespesaInline, PagamentoPedidoInline0, PagamentoDuplicataInline0, TransferenciaInline0, TransferenciaInlineDestino0, AjusteContaInline0]
 
 class TransacaoAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -236,7 +238,7 @@ admin.site.register(Pagamento_Pedido)
 admin.site.register(Pagamento_Duplicata)
 admin.site.register(Tipo_Despesa)
 admin.site.register(Despesa, DespesaAdmin)
-admin.site.register(Movimento_Estoque)
+admin.site.register(Ajuste_Estoque)
 admin.site.register(Transferencia)
 admin.site.register(Contas, ContasAdmin)
 admin.site.register(Transacao, TransacaoAdmin)

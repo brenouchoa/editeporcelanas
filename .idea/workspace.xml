@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c3b4737-779d-4eb8-b855-963fdf5749b5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/loja/signals.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/base.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/loja/index.html" afterPath="$PROJECT_DIR$/templates/admin/editeporcelanas/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/editeporcelanas.db" afterPath="$PROJECT_DIR$/db/editeporcelanas.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/brenouchoa.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/brenouchoa.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editeporcelanas/settings.py" afterPath="$PROJECT_DIR$/editeporcelanas/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editeporcelanas/urls.py" afterPath="$PROJECT_DIR$/editeporcelanas/urls.py" />
@@ -34,141 +36,111 @@
     <favorites_list name="editeporcelanas" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.30185184">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="admin.py" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/loja/admin.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="211" column="0" selection-start="7728" selection-end="7728" vertical-scroll-proportion="0.855814">
-                  <folding>
-                    <element signature="e#8004#8016#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/loja/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="615" column="0" selection-start="30625" selection-end="30625" vertical-scroll-proportion="-3.6181817">
-                  <folding>
-                    <element signature="e#42#70#0" expanded="true" />
-                    <element signature="e#270#400#0" expanded="true" />
-                    <element signature="e#1756#2005#0" expanded="true" />
-                    <element signature="e#2043#2082#0" expanded="true" />
-                    <element signature="e#2198#2223#0" expanded="true" />
-                    <element signature="e#2255#2280#0" expanded="true" />
-                    <element signature="e#2734#2750#0" expanded="true" />
-                    <element signature="e#2782#2798#0" expanded="true" />
-                    <element signature="e#3397#3477#0" expanded="true" />
-                    <element signature="e#3509#3589#0" expanded="true" />
-                    <element signature="e#4400#4491#0" expanded="true" />
-                    <element signature="e#4523#4614#0" expanded="true" />
-                    <element signature="e#5081#5100#0" expanded="true" />
-                    <element signature="e#5132#5151#0" expanded="true" />
-                    <element signature="e#5995#6441#0" expanded="true" />
-                    <element signature="e#6602#6731#0" expanded="true" />
-                    <element signature="e#6925#7067#0" expanded="true" />
-                    <element signature="e#7259#7280#0" expanded="true" />
-                    <element signature="e#7312#7333#0" expanded="true" />
-                    <element signature="e#7892#7910#0" expanded="true" />
-                    <element signature="e#7942#7960#0" expanded="true" />
-                    <element signature="e#9005#9164#0" expanded="true" />
-                    <element signature="e#9229#9256#0" expanded="true" />
-                    <element signature="e#9458#9580#0" expanded="true" />
-                    <element signature="e#9660#9692#0" expanded="true" />
-                    <element signature="e#9925#10155#0" expanded="true" />
-                    <element signature="e#10359#10479#0" expanded="true" />
-                    <element signature="e#10511#10631#0" expanded="true" />
-                    <element signature="e#10661#11189#0" expanded="true" />
-                    <element signature="e#11923#11950#0" expanded="true" />
-                    <element signature="e#12151#13338#0" expanded="true" />
-                    <element signature="e#13533#13595#0" expanded="true" />
-                    <element signature="e#13627#13689#0" expanded="true" />
-                    <element signature="e#14633#14763#0" expanded="true" />
-                    <element signature="e#14828#14855#0" expanded="true" />
-                    <element signature="e#15015#15136#0" expanded="true" />
-                    <element signature="e#15216#15248#0" expanded="true" />
-                    <element signature="e#15429#15662#0" expanded="true" />
-                    <element signature="e#15866#16013#0" expanded="true" />
-                    <element signature="e#16045#16192#0" expanded="true" />
-                    <element signature="e#16812#16839#0" expanded="true" />
-                    <element signature="e#17211#17312#0" expanded="true" />
-                    <element signature="e#17344#17445#0" expanded="true" />
-                    <element signature="e#17717#19735#0" expanded="true" />
-                    <element signature="e#19818#19851#0" expanded="true" />
-                    <element signature="e#20089#20105#0" expanded="true" />
-                    <element signature="e#20137#20153#0" expanded="true" />
-                    <element signature="e#20911#22293#0" expanded="true" />
-                    <element signature="e#22330#22359#0" expanded="true" />
-                    <element signature="e#22565#23737#0" expanded="true" />
-                    <element signature="e#23773#23846#0" expanded="true" />
-                    <element signature="e#23878#23951#0" expanded="true" />
-                    <element signature="e#24526#24553#0" expanded="true" />
-                    <element signature="e#24713#24835#0" expanded="true" />
-                    <element signature="e#24867#24989#0" expanded="true" />
-                    <element signature="e#25547#25574#0" expanded="true" />
-                    <element signature="e#25734#25850#0" expanded="true" />
-                    <element signature="e#25882#25998#0" expanded="true" />
-                    <element signature="e#26486#26507#0" expanded="true" />
-                    <element signature="e#26539#26560#0" expanded="true" />
-                    <element signature="e#27223#27250#0" expanded="true" />
-                    <element signature="e#27410#27494#0" expanded="true" />
-                    <element signature="e#27526#27610#0" expanded="true" />
-                    <element signature="e#28550#28679#0" expanded="true" />
-                    <element signature="e#28711#28840#0" expanded="true" />
-                    <element signature="e#29426#29453#0" expanded="true" />
-                    <element signature="e#29650#29764#0" expanded="true" />
-                    <element signature="e#29800#29923#0" expanded="true" />
-                    <element signature="e#29955#30078#0" expanded="true" />
-                    <element signature="e#30473#30500#0" expanded="true" />
-                    <element signature="e#30661#30757#0" expanded="true" />
-                    <element signature="e#30789#30885#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/editeporcelanas/settings.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="121" column="33" selection-start="4801" selection-end="4801" vertical-scroll-proportion="0.33255813">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="humanize.py" pinned="false" current="false" current-in-tab="false">
-            <entry file="file:///Library/Python/2.7/site-packages/django/contrib/humanize/templatetags/humanize.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="30" column="0" selection-start="999" selection-end="1653" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="e#0#39#0" expanded="true" />
-                    <element signature="e#490#966#0" expanded="true" />
-                    <element signature="e#1039#1655#0" expanded="true" />
-                    <element signature="e#3807#4835#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/editeporcelanas/urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="4" column="0" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/loja/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="258" column="116" selection-start="11724" selection-end="11724" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#985#2335#0" expanded="false" />
+                <element signature="e#1716#1807#0" expanded="false" />
+                <element signature="e#2376#2878#0" expanded="false" />
+                <element signature="e#2670#2777#0" expanded="false" />
+                <element signature="e#2914#3748#0" expanded="false" />
+                <element signature="e#3370#3511#0" expanded="false" />
+                <element signature="e#3784#4893#0" expanded="false" />
+                <element signature="e#4497#4633#0" expanded="false" />
+                <element signature="e#4928#5467#0" expanded="false" />
+                <element signature="e#5502#7726#0" expanded="false" />
+                <element signature="e#6239#6356#0" expanded="false" />
+                <element signature="e#7760#8353#0" expanded="false" />
+                <element signature="e#8156#8249#0" expanded="false" />
+                <element signature="e#8387#11724#0" expanded="false" />
+                <element signature="e#9400#9494#0" expanded="false" />
+                <element signature="e#11763#14028#0" expanded="false" />
+                <element signature="e#12540#12674#0" expanded="false" />
+                <element signature="e#14065#16685#0" expanded="false" />
+                <element signature="e#14939#15039#0" expanded="false" />
+                <element signature="e#16727#17970#0" expanded="false" />
+                <element signature="e#17345#17485#0" expanded="false" />
+                <element signature="e#18004#20727#0" expanded="false" />
+                <element signature="e#18161#18252#0" expanded="false" />
+                <element signature="e#20764#24972#0" expanded="false" />
+                <element signature="e#21412#21532#0" expanded="false" />
+                <element signature="e#25016#26078#0" expanded="false" />
+                <element signature="e#25418#25568#0" expanded="false" />
+                <element signature="e#26119#27127#0" expanded="false" />
+                <element signature="e#26488#26629#0" expanded="false" />
+                <element signature="e#27167#27694#0" expanded="false" />
+                <element signature="e#27473#27583#0" expanded="false" />
+                <element signature="e#27726#28836#0" expanded="false" />
+                <element signature="e#28273#28402#0" expanded="false" />
+                <element signature="e#28878#30122#0" expanded="false" />
+                <element signature="e#30160#31375#0" expanded="false" />
+                <element signature="e#30527#30675#0" expanded="false" />
+                <element signature="e#31412#32194#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/loja/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="169" column="34" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/editeporcelanas/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="0" selection-start="780" selection-end="780" vertical-scroll-proportion="0.54611653">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/editeporcelanas/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="20" selection-start="193" selection-end="193" vertical-scroll-proportion="-4.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editeporcelanas/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="142" column="19" selection-start="5393" selection-end="5393" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="61" selection-start="903" selection-end="903" vertical-scroll-proportion="-0.625">
+              <folding>
+                <marker date="1345792352000" expanded="true" signature="431:501" placeholder="{% block stylesheet_ie ... %}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base_site.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/base_site.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="-5.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -197,18 +169,21 @@
         <option value="/Library/Python/2.7/site-packages/django/contrib/admin/static/admin/js/admin/DateTimeShortcuts.js" />
         <option value="/Library/Python/2.7/site-packages/django/contrib/admin/filters.py" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/editeporcelanas/settings.py" />
         <option value="$PROJECT_DIR$/loja/signals.py" />
         <option value="$PROJECT_DIR$/loja/views.py" />
-        <option value="$PROJECT_DIR$/editeporcelanas/urls.py" />
         <option value="$PROJECT_DIR$/loja/admin.py" />
         <option value="$PROJECT_DIR$/loja/models.py" />
+        <option value="$PROJECT_DIR$/templates/base_site.html" />
+        <option value="$PROJECT_DIR$/editeporcelanas/settings.py" />
+        <option value="$PROJECT_DIR$/editeporcelanas/urls.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="2" />
+    <option name="y" value="22" />
+    <option name="width" value="1277" />
+    <option name="height" value="774" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -236,16 +211,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -416,7 +381,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="loja" />
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editeporcelanas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editeporcelanas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editeporcelanas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -464,19 +451,35 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
-  <component name="PublishConfig" persistUploadOnCheckin="false" />
+  <component name="PublishConfig" persistUploadOnCheckin="false">
+    <servers>
+      <server id="4f0a8a56-03d0-4564-8370-bd84d736cac9">
+        <serverdata />
+      </server>
+    </servers>
+  </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <PyConsoleSettings>
@@ -488,9 +491,14 @@
       <PyConsoleSettings>
         <option name="myUseModuleSdk" value="true" />
         <option name="myModuleName" value="editeporcelanas" />
-        <option name="myWorkingDirectory" value="$PROJECT_DIR$" />
       </PyConsoleSettings>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin" />
+      <recent name="$PROJECT_DIR$/templates/loja" />
+    </key>
   </component>
   <component name="RunManager" selected="Django server.editeporcelanas">
     <configuration default="false" name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -591,6 +599,25 @@
       <option name="MULTIPROCESS" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="editeporcelanas" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -610,25 +637,6 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="editeporcelanas" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -663,7 +671,7 @@
       <option name="port" value="8000" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="http://127.0.0.1:8000/admin/loja" />
+      <option name="browserUrl" value="" />
       <option name="runTestServer" value="false" />
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
@@ -675,11 +683,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Django server.editeporcelanas" />
-      <item index="1" class="java.lang.String" itemvalue="Python.models" />
-      <item index="2" class="java.lang.String" itemvalue="Python.admin" />
-      <item index="3" class="java.lang.String" itemvalue="Python.manage" />
-      <item index="4" class="java.lang.String" itemvalue="Python's test.Doctests in /Users/brenouchoa/PycharmProjects/editeporcelanas" />
+      <item index="0" class="java.lang.String" itemvalue="Python.models" />
+      <item index="1" class="java.lang.String" itemvalue="Python.admin" />
+      <item index="2" class="java.lang.String" itemvalue="Python.manage" />
+      <item index="3" class="java.lang.String" itemvalue="Python's test.Doctests in /Users/brenouchoa/PycharmProjects/editeporcelanas" />
+      <item index="4" class="java.lang.String" itemvalue="Django server.editeporcelanas" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -711,7 +719,11 @@
       <created>1345579030632</created>
       <updated>1345579030632</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="v1">
+      <created>1345687583400</created>
+      <updated>1345687583400</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -735,24 +747,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="2" y="22" width="1277" height="774" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.49675852" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32952926" sideWeight="0.48055106" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.48055106" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.5672609" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.124797404" sideWeight="0.2168331" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.124797404" sideWeight="0.4436519" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12641816" sideWeight="0.36947218" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13484971" sideWeight="0.6722818" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39942938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14829822" sideWeight="0.403709" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281027" sideWeight="0.5202593" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281027" sideWeight="0.47406808" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32771823" sideWeight="0.47406808" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.493517" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952926" sideWeight="0.49675852" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39942938" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -815,21 +827,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Python/2.7/site-packages/django/bin/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/django/bin/daily_cleanup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/django/contrib/admin/filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="31" selection-start="12226" selection-end="12226" vertical-scroll-proportion="0.45348838" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="21" selection-start="2953" selection-end="2953" vertical-scroll-proportion="-7.826087" />
@@ -867,122 +864,97 @@
     </entry>
     <entry file="file:///Library/Python/2.7/site-packages/django/contrib/humanize/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file:///Library/Python/2.7/site-packages/django/contrib/humanize/templatetags/humanize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="999" selection-end="1653" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <element signature="e#490#966#0" expanded="true" />
-            <element signature="e#1039#1655#0" expanded="true" />
-            <element signature="e#3807#4835#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="30" column="0" selection-start="999" selection-end="1653" vertical-scroll-proportion="0.036036037" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/loja/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="211" column="0" selection-start="7728" selection-end="7728" vertical-scroll-proportion="0.855814">
-          <folding>
-            <element signature="e#8004#8016#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editeporcelanas/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="169" column="34" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/loja/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="615" column="0" selection-start="30625" selection-end="30625" vertical-scroll-proportion="-3.6181817">
+        <state line="258" column="116" selection-start="11724" selection-end="11724" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#42#70#0" expanded="true" />
-            <element signature="e#270#400#0" expanded="true" />
-            <element signature="e#1756#2005#0" expanded="true" />
-            <element signature="e#2043#2082#0" expanded="true" />
-            <element signature="e#2198#2223#0" expanded="true" />
-            <element signature="e#2255#2280#0" expanded="true" />
-            <element signature="e#2734#2750#0" expanded="true" />
-            <element signature="e#2782#2798#0" expanded="true" />
-            <element signature="e#3397#3477#0" expanded="true" />
-            <element signature="e#3509#3589#0" expanded="true" />
-            <element signature="e#4400#4491#0" expanded="true" />
-            <element signature="e#4523#4614#0" expanded="true" />
-            <element signature="e#5081#5100#0" expanded="true" />
-            <element signature="e#5132#5151#0" expanded="true" />
-            <element signature="e#5995#6441#0" expanded="true" />
-            <element signature="e#6602#6731#0" expanded="true" />
-            <element signature="e#6925#7067#0" expanded="true" />
-            <element signature="e#7259#7280#0" expanded="true" />
-            <element signature="e#7312#7333#0" expanded="true" />
-            <element signature="e#7892#7910#0" expanded="true" />
-            <element signature="e#7942#7960#0" expanded="true" />
-            <element signature="e#9005#9164#0" expanded="true" />
-            <element signature="e#9229#9256#0" expanded="true" />
-            <element signature="e#9458#9580#0" expanded="true" />
-            <element signature="e#9660#9692#0" expanded="true" />
-            <element signature="e#9925#10155#0" expanded="true" />
-            <element signature="e#10359#10479#0" expanded="true" />
-            <element signature="e#10511#10631#0" expanded="true" />
-            <element signature="e#10661#11189#0" expanded="true" />
-            <element signature="e#11923#11950#0" expanded="true" />
-            <element signature="e#12151#13338#0" expanded="true" />
-            <element signature="e#13533#13595#0" expanded="true" />
-            <element signature="e#13627#13689#0" expanded="true" />
-            <element signature="e#14633#14763#0" expanded="true" />
-            <element signature="e#14828#14855#0" expanded="true" />
-            <element signature="e#15015#15136#0" expanded="true" />
-            <element signature="e#15216#15248#0" expanded="true" />
-            <element signature="e#15429#15662#0" expanded="true" />
-            <element signature="e#15866#16013#0" expanded="true" />
-            <element signature="e#16045#16192#0" expanded="true" />
-            <element signature="e#16812#16839#0" expanded="true" />
-            <element signature="e#17211#17312#0" expanded="true" />
-            <element signature="e#17344#17445#0" expanded="true" />
-            <element signature="e#17717#19735#0" expanded="true" />
-            <element signature="e#19818#19851#0" expanded="true" />
-            <element signature="e#20089#20105#0" expanded="true" />
-            <element signature="e#20137#20153#0" expanded="true" />
-            <element signature="e#20911#22293#0" expanded="true" />
-            <element signature="e#22330#22359#0" expanded="true" />
-            <element signature="e#22565#23737#0" expanded="true" />
-            <element signature="e#23773#23846#0" expanded="true" />
-            <element signature="e#23878#23951#0" expanded="true" />
-            <element signature="e#24526#24553#0" expanded="true" />
-            <element signature="e#24713#24835#0" expanded="true" />
-            <element signature="e#24867#24989#0" expanded="true" />
-            <element signature="e#25547#25574#0" expanded="true" />
-            <element signature="e#25734#25850#0" expanded="true" />
-            <element signature="e#25882#25998#0" expanded="true" />
-            <element signature="e#26486#26507#0" expanded="true" />
-            <element signature="e#26539#26560#0" expanded="true" />
-            <element signature="e#27223#27250#0" expanded="true" />
-            <element signature="e#27410#27494#0" expanded="true" />
-            <element signature="e#27526#27610#0" expanded="true" />
-            <element signature="e#28550#28679#0" expanded="true" />
-            <element signature="e#28711#28840#0" expanded="true" />
-            <element signature="e#29426#29453#0" expanded="true" />
-            <element signature="e#29650#29764#0" expanded="true" />
-            <element signature="e#29800#29923#0" expanded="true" />
-            <element signature="e#29955#30078#0" expanded="true" />
-            <element signature="e#30473#30500#0" expanded="true" />
-            <element signature="e#30661#30757#0" expanded="true" />
-            <element signature="e#30789#30885#0" expanded="true" />
+            <element signature="e#985#2335#0" expanded="false" />
+            <element signature="e#1716#1807#0" expanded="false" />
+            <element signature="e#2376#2878#0" expanded="false" />
+            <element signature="e#2670#2777#0" expanded="false" />
+            <element signature="e#2914#3748#0" expanded="false" />
+            <element signature="e#3370#3511#0" expanded="false" />
+            <element signature="e#3784#4893#0" expanded="false" />
+            <element signature="e#4497#4633#0" expanded="false" />
+            <element signature="e#4928#5467#0" expanded="false" />
+            <element signature="e#5502#7726#0" expanded="false" />
+            <element signature="e#6239#6356#0" expanded="false" />
+            <element signature="e#7760#8353#0" expanded="false" />
+            <element signature="e#8156#8249#0" expanded="false" />
+            <element signature="e#8387#11724#0" expanded="false" />
+            <element signature="e#9400#9494#0" expanded="false" />
+            <element signature="e#11763#14028#0" expanded="false" />
+            <element signature="e#12540#12674#0" expanded="false" />
+            <element signature="e#14065#16685#0" expanded="false" />
+            <element signature="e#14939#15039#0" expanded="false" />
+            <element signature="e#16727#17970#0" expanded="false" />
+            <element signature="e#17345#17485#0" expanded="false" />
+            <element signature="e#18004#20727#0" expanded="false" />
+            <element signature="e#18161#18252#0" expanded="false" />
+            <element signature="e#20764#24972#0" expanded="false" />
+            <element signature="e#21412#21532#0" expanded="false" />
+            <element signature="e#25016#26078#0" expanded="false" />
+            <element signature="e#25418#25568#0" expanded="false" />
+            <element signature="e#26119#27127#0" expanded="false" />
+            <element signature="e#26488#26629#0" expanded="false" />
+            <element signature="e#27167#27694#0" expanded="false" />
+            <element signature="e#27473#27583#0" expanded="false" />
+            <element signature="e#27726#28836#0" expanded="false" />
+            <element signature="e#28273#28402#0" expanded="false" />
+            <element signature="e#28878#30122#0" expanded="false" />
+            <element signature="e#30160#31375#0" expanded="false" />
+            <element signature="e#30527#30675#0" expanded="false" />
+            <element signature="e#31412#32194#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/editeporcelanas/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="20" selection-start="193" selection-end="193" vertical-scroll-proportion="-4.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="61" selection-start="903" selection-end="903" vertical-scroll-proportion="-0.625">
+          <folding>
+            <marker date="1345792352000" expanded="true" signature="431:501" placeholder="{% block stylesheet_ie ... %}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/base_site.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="-5.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editeporcelanas/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="33" selection-start="4801" selection-end="4801" vertical-scroll-proportion="0.33255813">
+        <state line="142" column="19" selection-start="5393" selection-end="5393" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editeporcelanas/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="780" selection-end="780" vertical-scroll-proportion="0.54611653">
           <folding />
         </state>
       </provider>

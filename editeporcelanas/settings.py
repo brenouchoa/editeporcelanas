@@ -118,8 +118,16 @@ ROOT_URLCONF = 'editeporcelanas.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'editeporcelanas.wsgi.application'
 
-TEMPLATE_DIRS = ('/Users/brenouchoa/PycharmProjects/editeporcelanas/templates',
-                 'C:/Users/Edite/Documents/Github/editeporcelanas/templates'
+if DEBUG:
+    TEMPLATE_DIRS = ('/Users/brenouchoa/PycharmProjects/editeporcelanas/templates'
+    )
+else:
+    TEMPLATE_DIRS = ('C:/Users/Edite/Documents/Github/editeporcelanas/templates'
+    )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth'
     )
 
 INSTALLED_APPS = (
